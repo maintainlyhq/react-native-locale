@@ -1,0 +1,263 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DB248BF51C18396500105A5D /* RCTLocale.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DB248BF41C18396500105A5D /* RCTLocale.h */; };
+		DB248BF71C18396500105A5D /* RCTLocale.m in Sources */ = {isa = PBXBuildFile; fileRef = DB248BF61C18396500105A5D /* RCTLocale.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DB248BF01C18396500105A5D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				DB248BF51C18396500105A5D /* RCTLocale.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DB248BF21C18396500105A5D /* libRCTLocale.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTLocale.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB248BF41C18396500105A5D /* RCTLocale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTLocale.h; sourceTree = "<group>"; };
+		DB248BF61C18396500105A5D /* RCTLocale.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTLocale.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB248BEF1C18396500105A5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DB0CBAD11C1831B200168F2E = {
+			isa = PBXGroup;
+			children = (
+				DB9768661C183ADA00042D1A /* Products */,
+				DB248BF31C18396500105A5D /* RCTLocale */,
+			);
+			sourceTree = "<group>";
+		};
+		DB248BF31C18396500105A5D /* RCTLocale */ = {
+			isa = PBXGroup;
+			children = (
+				DB248BF41C18396500105A5D /* RCTLocale.h */,
+				DB248BF61C18396500105A5D /* RCTLocale.m */,
+			);
+			path = RCTLocale;
+			sourceTree = "<group>";
+		};
+		DB9768661C183ADA00042D1A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB248BF21C18396500105A5D /* libRCTLocale.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DB248BF11C18396500105A5D /* RCTLocale */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB248BF81C18396500105A5D /* Build configuration list for PBXNativeTarget "RCTLocale" */;
+			buildPhases = (
+				DB248BEE1C18396500105A5D /* Sources */,
+				DB248BEF1C18396500105A5D /* Frameworks */,
+				DB248BF01C18396500105A5D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RCTLocale;
+			productName = RCTLocale;
+			productReference = DB248BF21C18396500105A5D /* libRCTLocale.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DB0CBAD21C1831B200168F2E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				TargetAttributes = {
+					DB248BF11C18396500105A5D = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = DB0CBAD51C1831B200168F2E /* Build configuration list for PBXProject "RCTLocale" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DB0CBAD11C1831B200168F2E;
+			productRefGroup = DB0CBAD11C1831B200168F2E;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB248BF11C18396500105A5D /* RCTLocale */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB248BEE1C18396500105A5D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB248BF71C18396500105A5D /* RCTLocale.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DB0CBAD61C1831B200168F2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../React/**",
+					"$(SRCROOT)/../react-native/React/**",
+					"$(SRCROOT)/node_modules/react-native/React/**",
+				);
+			};
+			name = Debug;
+		};
+		DB0CBAD71C1831B200168F2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../React/**",
+					"$(SRCROOT)/../react-native/React/**",
+					"$(SRCROOT)/node_modules/react-native/React/**",
+				);
+			};
+			name = Release;
+		};
+		DB248BF91C18396500105A5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DB248BFA1C18396500105A5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DB0CBAD51C1831B200168F2E /* Build configuration list for PBXProject "RCTLocale" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB0CBAD61C1831B200168F2E /* Debug */,
+				DB0CBAD71C1831B200168F2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB248BF81C18396500105A5D /* Build configuration list for PBXNativeTarget "RCTLocale" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB248BF91C18396500105A5D /* Debug */,
+				DB248BFA1C18396500105A5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DB0CBAD21C1831B200168F2E /* Project object */;
+}

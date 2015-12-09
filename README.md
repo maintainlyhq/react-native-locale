@@ -31,23 +31,24 @@ Methods exported by module:
 
 
 ```js
-Locale.decimalStyle(12501.50, (response) => {
+Locale.decimalStyle(12501.50).then((response) => {
 	console.log(response);
 });
-Locale.currencyStyle(12501.50, (response) => {
+Locale.currencyStyle(12501.50).then((response) => {
 	console.log(response);
 });
-Locale.percentStyle(1251.50, (response) => {
+Locale.percentStyle(125.50).then((response) => {
 	console.log(response);
 });
-Locale.scientificStyle(12501.50, (response) => {
+Locale.scientificStyle(12501.50).then((response) => {
 	console.log(response);
 });
-Locale.spelloutStyle(12501.50, (response) => {
+Locale.spelloutStyle(12501.50).then((response) => {
 	console.log(response);
 });
-Locale.numberFromDecimalString('125.01010', (response) => {
-	console.log(response);
+
+Locale.numberFromDecimalString('125.01010').then((response) => {
+	console.log('then', response);
 });
 ```
 

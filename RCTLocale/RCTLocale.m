@@ -31,32 +31,48 @@ RCT_EXPORT_MODULE();
     return [[NSLocale currentLocale] objectForKey:NSLocaleQuotationEndDelimiterKey];
 }
 
-RCT_EXPORT_METHOD(decimalStyle:(nonnull NSNumber *)myNumber callback:(RCTResponseSenderBlock)callback){
-    callback(@[[NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterDecimalStyle]]);
+RCT_EXPORT_METHOD(decimalStyle:(nonnull NSNumber *)myNumber
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject){
+    resolve([NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterDecimalStyle]);
 }
 
-RCT_EXPORT_METHOD(currencyStyle:(nonnull NSNumber *)myNumber callback:(RCTResponseSenderBlock)callback){
-    callback(@[[NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterCurrencyStyle]]);
+RCT_EXPORT_METHOD(currencyStyle:(nonnull NSNumber *)myNumber
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject){
+    resolve([NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterCurrencyStyle]);
 }
 
-RCT_EXPORT_METHOD(percentStyle:(nonnull NSNumber *)myNumber callback:(RCTResponseSenderBlock)callback){
-    callback(@[[NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterPercentStyle]]);
+RCT_EXPORT_METHOD(percentStyle:(nonnull NSNumber *)myNumber
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject){
+    resolve([NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterPercentStyle]);
 }
 
-RCT_EXPORT_METHOD(scientificStyle:(nonnull NSNumber *)myNumber callback:(RCTResponseSenderBlock)callback){
-    callback(@[[NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterScientificStyle]]);
+RCT_EXPORT_METHOD(scientificStyle:(nonnull NSNumber *)myNumber
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject){
+    resolve([NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterScientificStyle]);
 }
 
-RCT_EXPORT_METHOD(spelloutStyle:(nonnull NSNumber *)myNumber callback:(RCTResponseSenderBlock)callback){
-    callback(@[[NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterSpellOutStyle]]);
+RCT_EXPORT_METHOD(spelloutStyle:(nonnull NSNumber *)myNumber
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject){
+    resolve([NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterSpellOutStyle]);
 }
 
-RCT_EXPORT_METHOD(numberFromDecimalString:(NSString *)inputString callback:(RCTResponseSenderBlock)callback){
+RCT_EXPORT_METHOD(numberFromDecimalString:(NSString *)inputString
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject){
     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     numberFormatter.lenient = YES;
     NSNumber *number = [numberFormatter numberFromString:inputString];
-    callback(@[number]);
+    if(number) {
+        resolve(number);
+    } else {
+        reject(number);
+    }
 }
             
 - (NSDictionary *)constantsToExport

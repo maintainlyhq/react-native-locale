@@ -71,7 +71,7 @@ RCT_EXPORT_METHOD(numberFromDecimalString:(NSString *)inputString
     if(number) {
         resolve(number);
     } else {
-        reject(number);
+        reject(nil, nil, nil);
     }
 }
             

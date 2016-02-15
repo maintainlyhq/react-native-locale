@@ -8,6 +8,8 @@ https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPIntern
 
 `npm install react-native-locale --save`
 
+(Ensure you rely on npm versioning via https://www.npmjs.com/package/react-native-locale - not the github releases tab.)
+
 For iOS: Add RCTLocale.xcodeproj to Libraries and add libRCTLocale.a to Link Binary With Libraries under Build Phases.
 
 For Android:

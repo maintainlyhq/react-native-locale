@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.WritableNativeMap;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -46,9 +47,15 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
         try {
             NumberFormat nf = NumberFormat.getNumberInstance(getLocale());
             nf.setGroupingUsed(true);
-            promise.resolve(nf.format(number));
+
+            WritableNativeMap result = new WritableNativeMap();
+            result.putDouble("original", number);
+            result.putString("result", nf.format(number));
+
+            promise.resolve(result);
         } catch (Exception e) {
-            promise.reject(e.getMessage());
+            e.printStackTrace();
+            promise.reject(e);
         }
     }
 
@@ -56,8 +63,14 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
     public void numberFromDecimalString(String numberString, Promise promise) {
         try {
             NumberFormat nf = NumberFormat.getInstance(getLocale());
-            promise.resolve(nf.parse(numberString));
+
+            WritableNativeMap result = new WritableNativeMap();
+            result.putString("original", numberString);
+            result.putDouble("result", nf.parse(numberString).doubleValue());
+
+            promise.resolve(result);
         } catch (Exception e) {
+            e.printStackTrace();
             promise.reject(e.getMessage());
         }
     }

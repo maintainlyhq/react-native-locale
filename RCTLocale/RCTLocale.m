@@ -4,74 +4,56 @@
 //
 
 #import "RCTLocale.h"
+#import "RCTUtils.h"
+
+@implementation RCTConvert (NSDateFormatterStyle)
+RCT_ENUM_CONVERTER(NSDateFormatterStyle, (@{
+                                            @"none": @(NSDateFormatterNoStyle),
+                                            @"full": @(NSDateFormatterFullStyle),
+                                            @"long": @(NSDateFormatterLongStyle),
+                                            @"medium": @(NSDateFormatterMediumStyle),
+                                            @"short": @(NSDateFormatterShortStyle),
+                                            }), NSDateFormatterFullStyle, integerValue);
+@end
 
 @interface RCTLocale ()
--(NSString*) getCurrentLocale;
--(NSString*) getDecimalSeparator;
--(NSString*) getQuotationBeginDelimiterKey;
--(NSString*) getQuotationEndDelimiterKey;
 @end
 
 @implementation RCTLocale
 RCT_EXPORT_MODULE();
 
--(NSString*) getCurrentLocale{
-    return [[NSLocale currentLocale] objectForKey:NSLocaleIdentifier];
-}
-            
--(NSString*) getDecimalSeparator{
-    return [[NSLocale currentLocale] objectForKey:NSLocaleDecimalSeparator];
-}
-            
--(NSString*) getQuotationBeginDelimiterKey{
-    return [[NSLocale currentLocale] objectForKey:NSLocaleQuotationBeginDelimiterKey];
-}
-            
--(NSString*) getQuotationEndDelimiterKey{
-    return [[NSLocale currentLocale] objectForKey:NSLocaleQuotationEndDelimiterKey];
-}
 
 RCT_EXPORT_METHOD(decimalStyle:(nonnull NSNumber *)myNumber
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject){
-    NSString *number = [NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterDecimalStyle];
-    NSDictionary *result = [NSDictionary dictionaryWithObjectsAndKeys:number,@"result", nil];
-    resolve(result);
+    resolve([NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterDecimalStyle]);
 }
 
 RCT_EXPORT_METHOD(currencyStyle:(nonnull NSNumber *)myNumber
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject){
-    NSString *number = [NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterCurrencyStyle];
-    NSDictionary *result = [NSDictionary dictionaryWithObjectsAndKeys:number,@"result", nil];
-    resolve(result);
+    resolve([NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterCurrencyStyle]);
 }
 
 RCT_EXPORT_METHOD(percentStyle:(nonnull NSNumber *)myNumber
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject){
-	NSString *number = [NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterPercentStyle];
-	NSDictionary *result = [NSDictionary dictionaryWithObjectsAndKeys:number,@"result", nil];
-	resolve(result);
+    resolve([NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterPercentStyle]);
 }
 
 RCT_EXPORT_METHOD(scientificStyle:(nonnull NSNumber *)myNumber
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject){
-    NSString *number = [NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterScientificStyle];
-	NSDictionary *result = [NSDictionary dictionaryWithObjectsAndKeys:number,@"result", nil];
-    resolve(result);
+    resolve([NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterScientificStyle]);
 }
 
 RCT_EXPORT_METHOD(spelloutStyle:(nonnull NSNumber *)myNumber
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject){
-    NSString *number = [NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterSpellOutStyle];
-    NSDictionary *result = [NSDictionary dictionaryWithObjectsAndKeys:number,@"result", nil];
-    resolve(result);
+    resolve([NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterSpellOutStyle]);
 }
 
-RCT_EXPORT_METHOD(numberFromDecimalString:(NSString *)inputString
+RCT_EXPORT_METHOD(numberFromDecimalString:(nonnull NSString *)inputString
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject){
     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
@@ -79,20 +61,48 @@ RCT_EXPORT_METHOD(numberFromDecimalString:(NSString *)inputString
     numberFormatter.lenient = YES;
     NSNumber *number = [numberFormatter numberFromString:inputString];
     if(number) {
-        NSDictionary *result = [NSDictionary dictionaryWithObjectsAndKeys:number,@"result", nil];
-        resolve(result);
+        resolve(number);
     } else {
         reject(nil, nil, nil);
     }
 }
-            
+
+RCT_EXPORT_METHOD(dateFormat:(nonnull NSDate *)date
+                  dateStyle:(NSDateFormatterStyle)dateStyle
+                  timeStyle:(NSDateFormatterStyle)timeStyle
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject){
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = dateStyle;
+    dateFormatter.timeStyle = timeStyle;
+    
+    resolve([dateFormatter stringFromDate:date]);
+}
+
 - (NSDictionary *)constantsToExport
 {
+    
+    NSLocale *locale = [NSLocale currentLocale];
+    NSCalendar *cal = [locale objectForKey:NSLocaleCalendar];
+    
     return @{
-             @"locale": [self getCurrentLocale],
-             @"decimalSeparator": [self getDecimalSeparator],
-             @"quotationBeginDelimiterKey": [self getQuotationBeginDelimiterKey],
-             @"quotationEndDelimiterKey": [self getQuotationEndDelimiterKey]
-    };
+            @"localeIdentifier": [locale objectForKey:NSLocaleIdentifier],
+            @"localeLanguageCode": [locale objectForKey:NSLocaleLanguageCode],
+            @"countryCode": [locale objectForKey:NSLocaleCountryCode],
+            @"calendar": cal.calendarIdentifier,
+            @"usesMetricSystem": [locale objectForKey:NSLocaleUsesMetricSystem],
+            @"measurementSystem": [locale objectForKey:NSLocaleMeasurementSystem],
+            @"decimalSeparator": [locale objectForKey:NSLocaleDecimalSeparator],
+            @"groupingSeparator": [locale objectForKey:NSLocaleGroupingSeparator],
+            @"currencySymbol": [locale objectForKey:NSLocaleCurrencySymbol],
+            @"currencyCode": [locale objectForKey:NSLocaleCurrencyCode],
+            @"collatorIdentifier": [locale objectForKey:NSLocaleCollatorIdentifier],
+            @"quotationBeginDelimiterKey": [locale objectForKey:NSLocaleQuotationBeginDelimiterKey],
+            @"quotationEndDelimiterKey": [locale objectForKey:NSLocaleQuotationEndDelimiterKey],
+            @"alternateQuotationBeginDelimiterKey": [locale objectForKey:NSLocaleAlternateQuotationBeginDelimiterKey],
+            @"alternateQuotationEndDelimiterKey": [locale objectForKey:NSLocaleAlternateQuotationEndDelimiterKey],
+            @"preferredLanguages": [NSLocale preferredLanguages]
+   };
 }
 @end

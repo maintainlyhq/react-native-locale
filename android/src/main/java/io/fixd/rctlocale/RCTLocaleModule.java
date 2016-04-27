@@ -17,6 +17,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.lang.Long;
+import java.text.SimpleDateFormat;
 
 public class RCTLocaleModule extends ReactContextBaseJavaModule {
 
@@ -42,6 +43,19 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
         constants.put("localeIdentifier", current.toString());
         constants.put("decimalSeparator", String.valueOf(formatterSymbols.getDecimalSeparator()));
         constants.put("groupingSeparator", String.valueOf(formatterSymbols.getGroupingSeparator()));
+
+        final Map<String, String> formats = new HashMap<>();
+        DateFormat dateFormatter;
+        dateFormatter = DateFormat.getDateInstance(DateFormat.FULL, getLocale());
+        formats.put("full", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
+        dateFormatter = DateFormat.getDateInstance(DateFormat.LONG, getLocale());
+        formats.put("long", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
+        dateFormatter = DateFormat.getDateInstance(DateFormat.MEDIUM, getLocale());
+        formats.put("medium", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
+        dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, getLocale());
+        formats.put("short", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
+        constants.put("localeDateFormats", formats);
+
         return constants;
     }
 

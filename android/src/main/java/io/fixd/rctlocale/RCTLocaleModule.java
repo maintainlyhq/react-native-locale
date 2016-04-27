@@ -6,14 +6,17 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.WritableNativeMap;
 
+import java.lang.String;
+import java.text.DateFormat;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Date;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.DecimalFormat;
+import java.lang.Long;
 
 public class RCTLocaleModule extends ReactContextBaseJavaModule {
 
@@ -36,7 +39,7 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
         DecimalFormatSymbols formatterSymbols = getDecimalFormat().getDecimalFormatSymbols();
 
         final Map<String, Object> constants = new HashMap<>();
-        constants.put("locale", current.toString());
+        constants.put("localeIdentifier", current.toString());
         constants.put("decimalSeparator", String.valueOf(formatterSymbols.getDecimalSeparator()));
         constants.put("groupingSeparator", String.valueOf(formatterSymbols.getGroupingSeparator()));
         return constants;
@@ -47,15 +50,9 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
         try {
             NumberFormat nf = NumberFormat.getNumberInstance(getLocale());
             nf.setGroupingUsed(true);
-
-            WritableNativeMap result = new WritableNativeMap();
-            result.putDouble("original", number);
-            result.putString("result", nf.format(number));
-
-            promise.resolve(result);
+            promise.resolve(nf.format(number));
         } catch (Exception e) {
-            e.printStackTrace();
-            promise.reject(e);
+            promise.reject(e.getMessage());
         }
     }
 
@@ -63,16 +60,59 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
     public void numberFromDecimalString(String numberString, Promise promise) {
         try {
             NumberFormat nf = NumberFormat.getInstance(getLocale());
-
-            WritableNativeMap result = new WritableNativeMap();
-            result.putString("original", numberString);
-            result.putDouble("result", nf.parse(numberString).doubleValue());
-
-            promise.resolve(result);
+            promise.resolve(nf.parse(numberString));
         } catch (Exception e) {
-            e.printStackTrace();
             promise.reject(e.getMessage());
         }
+    }
+
+    @ReactMethod
+    public void dateFormat(String timestamp, String dateStyle, String timeStyle, Promise promise) {
+        try {
+            Date date = new Date(Long.parseLong(timestamp));
+
+            int dateStyleInt = this.getDateFormatIntFromString(dateStyle);
+            int timeStyleInt = this.getDateFormatIntFromString(timeStyle);
+
+            DateFormat dateFormatter;
+            if(!dateStyle.equals("none") && !timeStyle.equals("none")) {
+                Log.d("RCTLocale", "format 1");
+                dateFormatter = DateFormat.getDateTimeInstance(dateStyleInt, timeStyleInt, getLocale());
+            } else if(!dateStyle.equals("none") && timeStyle.equals("none")) {
+                Log.d("RCTLocale", "format 2");
+                dateFormatter = DateFormat.getDateInstance(dateStyleInt, getLocale());
+            } else {
+                Log.d("RCTLocale", "format 3");
+                dateFormatter = DateFormat.getTimeInstance(timeStyleInt, getLocale());
+            }
+
+            promise.resolve(dateFormatter.format(date));
+
+        } catch (Exception e) {
+            promise.reject(e.getMessage());
+        }
+    }
+    
+    private int getDateFormatIntFromString(String stringStyle) {
+        int dateFormatStyleint;
+        switch(stringStyle) {
+            case "long":
+                dateFormatStyleint = DateFormat.LONG;
+                break;
+            case "medium":
+                dateFormatStyleint = DateFormat.MEDIUM;
+                break;
+            case "short":
+                dateFormatStyleint = DateFormat.SHORT;
+                break;
+            case "default":
+                dateFormatStyleint = DateFormat.DEFAULT;
+                break;
+            default:
+                dateFormatStyleint = DateFormat.FULL;
+                break;
+        }
+        return dateFormatStyleint;
     }
 
     private Locale getLocale() {

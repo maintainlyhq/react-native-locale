@@ -76,13 +76,10 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
 
             DateFormat dateFormatter;
             if(!dateStyle.equals("none") && !timeStyle.equals("none")) {
-                Log.d("RCTLocale", "format 1");
                 dateFormatter = DateFormat.getDateTimeInstance(dateStyleInt, timeStyleInt, getLocale());
             } else if(!dateStyle.equals("none") && timeStyle.equals("none")) {
-                Log.d("RCTLocale", "format 2");
                 dateFormatter = DateFormat.getDateInstance(dateStyleInt, getLocale());
             } else {
-                Log.d("RCTLocale", "format 3");
                 dateFormatter = DateFormat.getTimeInstance(timeStyleInt, getLocale());
             }
 

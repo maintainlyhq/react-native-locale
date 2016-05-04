@@ -60,7 +60,7 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
     public void numberFromDecimalString(String numberString, Promise promise) {
         try {
             NumberFormat nf = NumberFormat.getInstance(getLocale());
-            promise.resolve(nf.parse(numberString));
+            promise.resolve(nf.parse(numberString).doubleValue());
         } catch (Exception e) {
             promise.reject(e.getMessage());
         }

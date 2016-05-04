@@ -1,6 +1,6 @@
 {
   "name": "react-native-locale",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Simple locale information and methods for react native",
   "repository": {
     "type": "git",

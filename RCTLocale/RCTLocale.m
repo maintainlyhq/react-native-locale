@@ -86,6 +86,17 @@ RCT_EXPORT_METHOD(dateFormat:(nonnull NSDate *)date
     NSLocale *locale = [NSLocale currentLocale];
     NSCalendar *cal = [locale objectForKey:NSLocaleCalendar];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterFullStyle;
+    NSMutableDictionary *formats = [[NSMutableDictionary alloc]initWithCapacity:4];
+    [formats setObject:dateFormatter.dateFormat forKey:@"full"];
+    dateFormatter.dateStyle = NSDateFormatterLongStyle;
+    [formats setObject:dateFormatter.dateFormat forKey:@"long"];
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    [formats setObject:dateFormatter.dateFormat forKey:@"medium"];
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    [formats setObject:dateFormatter.dateFormat forKey:@"short"];
+
     return @{
             @"localeIdentifier": [locale objectForKey:NSLocaleIdentifier],
             @"localeLanguageCode": [locale objectForKey:NSLocaleLanguageCode],
@@ -102,7 +113,8 @@ RCT_EXPORT_METHOD(dateFormat:(nonnull NSDate *)date
             @"quotationEndDelimiterKey": [locale objectForKey:NSLocaleQuotationEndDelimiterKey],
             @"alternateQuotationBeginDelimiterKey": [locale objectForKey:NSLocaleAlternateQuotationBeginDelimiterKey],
             @"alternateQuotationEndDelimiterKey": [locale objectForKey:NSLocaleAlternateQuotationEndDelimiterKey],
-            @"preferredLanguages": [NSLocale preferredLanguages]
+            @"preferredLanguages": [NSLocale preferredLanguages],
+            @"localeDateFormats": formats
    };
 }
 @end

@@ -1,6 +1,3 @@
-const React = require('react-native');
-const { Platform, NativeModules } = React;
-const NativeLocale = NativeModules.Locale;
 const LocaleBaseClass = require('./LocaleBaseClass');
 
 class Locale extends LocaleBaseClass {

@@ -1,5 +1,4 @@
-const React = require('react-native');
-const { Platform, NativeModules } = React;
+import { Platform, NativeModules } from 'react-native';
 const NativeLocale = NativeModules.Locale;
 const warning = require('fbjs/lib/warning');
 

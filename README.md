@@ -6,7 +6,10 @@ https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPIntern
 
 ## Installation
 
-`npm install react-native-locale --save`
+- `npm install react-native-locale --save`
+- `rnpm link` [rnpm](https://github.com/rnpm/rnpm)
+
+### Add libraries manually
 
 For iOS: Add RCTLocale.xcodeproj to Libraries and add libRCTLocale.a to Link Binary With Libraries under Build Phases.
 

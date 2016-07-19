@@ -19,8 +19,8 @@ For Android:
 // file: android/settings.gradle
 ...
 
-include ':RCTLocale', ':app'
-project(':RCTLocale').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-locale/android')
+include ':react-native-locale'
+project(':react-native-locale').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-locale/android')
 ```
 
 ```
@@ -29,16 +29,22 @@ project(':RCTLocale').projectDir = new File(rootProject.projectDir, '../node_mod
 
 dependencies {
     ...
-    compile project(':RCTLocale')
+    compile project(':react-native-locale')  // <- Add this
 }
 ```
 
 ```
-// file: android/app/source/main/java/com/{projectName}.MainActivity.java
+// file: android/app/source/main/java/com/{projectName}.MainApplication.java (or MainActivity.java for RN < 0.29)
 ...
-import fixd.io.rctlocale.RCTLocalePackage;
+import fixd.io.rctlocale.RCTLocalePackage;  // <- Add this
 ...
-.addPackage(new RNSimpleAlertDialogPackage(this))
+protected List<ReactPackage> getPackages() {
+	return Arrays.<ReactPackage>asList(
+			new MainReactPackage(),
+			...
+			new RCTLocalePackage()  // <- Add this
+	);
+}
 ...
 ```
 

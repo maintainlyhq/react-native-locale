@@ -80,6 +80,11 @@ RCT_EXPORT_METHOD(dateFormat:(nonnull NSDate *)date
     resolve([dateFormatter stringFromDate:date]);
 }
 
+static id ObjectOrNull(id object)
+{
+    return object ?: [NSNull null];
+}
+
 - (NSDictionary *)constantsToExport
 {
     
@@ -98,23 +103,23 @@ RCT_EXPORT_METHOD(dateFormat:(nonnull NSDate *)date
     [formats setObject:dateFormatter.dateFormat forKey:@"short"];
 
     return @{
-            @"localeIdentifier": [locale objectForKey:NSLocaleIdentifier],
-            @"localeLanguageCode": [locale objectForKey:NSLocaleLanguageCode],
-            @"countryCode": [locale objectForKey:NSLocaleCountryCode],
-            @"calendar": cal.calendarIdentifier,
-            @"usesMetricSystem": [locale objectForKey:NSLocaleUsesMetricSystem],
-            @"measurementSystem": [locale objectForKey:NSLocaleMeasurementSystem],
-            @"decimalSeparator": [locale objectForKey:NSLocaleDecimalSeparator],
-            @"groupingSeparator": [locale objectForKey:NSLocaleGroupingSeparator],
-            @"currencySymbol": [locale objectForKey:NSLocaleCurrencySymbol],
-            @"currencyCode": [locale objectForKey:NSLocaleCurrencyCode],
-            @"collatorIdentifier": [locale objectForKey:NSLocaleCollatorIdentifier],
-            @"quotationBeginDelimiterKey": [locale objectForKey:NSLocaleQuotationBeginDelimiterKey],
-            @"quotationEndDelimiterKey": [locale objectForKey:NSLocaleQuotationEndDelimiterKey],
-            @"alternateQuotationBeginDelimiterKey": [locale objectForKey:NSLocaleAlternateQuotationBeginDelimiterKey],
-            @"alternateQuotationEndDelimiterKey": [locale objectForKey:NSLocaleAlternateQuotationEndDelimiterKey],
-            @"preferredLanguages": [NSLocale preferredLanguages],
-            @"localeDateFormats": formats
+            @"localeIdentifier": ObjectOrNull([locale objectForKey:NSLocaleIdentifier]),
+            @"localeLanguageCode": ObjectOrNull([locale objectForKey:NSLocaleLanguageCode]),
+            @"countryCode": ObjectOrNull([locale objectForKey:NSLocaleCountryCode]),
+            @"calendar": ObjectOrNull(cal.calendarIdentifier),
+            @"usesMetricSystem": ObjectOrNull([locale objectForKey:NSLocaleUsesMetricSystem]),
+            @"measurementSystem": ObjectOrNull([locale objectForKey:NSLocaleMeasurementSystem]),
+            @"decimalSeparator": ObjectOrNull([locale objectForKey:NSLocaleDecimalSeparator]),
+            @"groupingSeparator": ObjectOrNull([locale objectForKey:NSLocaleGroupingSeparator]),
+            @"currencySymbol": ObjectOrNull([locale objectForKey:NSLocaleCurrencySymbol]),
+            @"currencyCode": ObjectOrNull([locale objectForKey:NSLocaleCurrencyCode]),
+            @"collatorIdentifier": ObjectOrNull([locale objectForKey:NSLocaleCollatorIdentifier]),
+            @"quotationBeginDelimiterKey": ObjectOrNull([locale objectForKey:NSLocaleQuotationBeginDelimiterKey]),
+            @"quotationEndDelimiterKey": ObjectOrNull([locale objectForKey:NSLocaleQuotationEndDelimiterKey]),
+            @"alternateQuotationBeginDelimiterKey": ObjectOrNull([locale objectForKey:NSLocaleAlternateQuotationBeginDelimiterKey]),
+            @"alternateQuotationEndDelimiterKey": ObjectOrNull([locale objectForKey:NSLocaleAlternateQuotationEndDelimiterKey]),
+            @"preferredLanguages": ObjectOrNull([NSLocale preferredLanguages]),
+            @"localeDateFormats": ObjectOrNull(formats)
    };
 }
 @end

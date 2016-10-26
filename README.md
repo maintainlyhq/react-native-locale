@@ -11,9 +11,19 @@ https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPIntern
 
 ### Add libraries manually
 
-For iOS: Add RCTLocale.xcodeproj to Libraries and add libRCTLocale.a to Link Binary With Libraries under Build Phases.
+#### iOS
 
-For Android:
+- Link manually
+  - Add RCTLocale.xcodeproj to Libraries and add libRCTLocale.a to Link Binary With Libraries under Build Phases.
+- Cocoapods
+  - Add following to your `Podfile`
+
+```ruby
+# Podfile
+pod 'react-native-locale', :path => './node_modules/react-native-locale'
+```
+
+#### Android
 
 ```
 // file: android/settings.gradle

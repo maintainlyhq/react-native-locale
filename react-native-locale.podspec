@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.platform = :ios, '7.0'
 
   s.preserve_paths = 'README.md', 'package.json', 'index.ios.js'
-  s.source_files = 'RCTLocale/*.{h,m}'
+  s.source_files = 'ios/RCTLocale/*.{h,m}'
 
   s.dependency 'React'
 end

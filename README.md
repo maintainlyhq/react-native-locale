@@ -34,11 +34,19 @@ dependencies {
 ```
 
 ```
-// file: android/app/source/main/java/com/{projectName}.MainActivity.java
+// file: android/app/source/main/java/com/{projectName}.MainApplication.java
 ...
-import fixd.io.rctlocale.RCTLocalePackage;
+import io.fixd.rctlocale.RCTLocalePackage;
 ...
-.addPackage(new RNSimpleAlertDialogPackage(this))
+public class MainApplication extends Application implements ReactApplication {
+    // ...
+    @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+          new RCTLocalePackage() // add package
+      );
+    }
 ...
 ```
 

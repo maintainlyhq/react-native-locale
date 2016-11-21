@@ -43,6 +43,7 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
         constants.put("localeIdentifier", current.toString());
         constants.put("decimalSeparator", String.valueOf(formatterSymbols.getDecimalSeparator()));
         constants.put("groupingSeparator", String.valueOf(formatterSymbols.getGroupingSeparator()));
+        constants.put("usesMetricSystem", !current.getISO3Country().equalsIgnoreCase("usa"));
 
         final Map<String, String> formats = new HashMap<>();
         DateFormat dateFormatter;

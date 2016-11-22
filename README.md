@@ -44,17 +44,19 @@ dependencies {
 ```
 
 ```
-// file: android/app/source/main/java/com/{projectName}.MainApplication.java (or MainActivity.java for RN < 0.29)
+// file: android/app/source/main/java/com/{projectName}.MainApplication.java
 ...
-import fixd.io.rctlocale.RCTLocalePackage;  // <- Add this
+import io.fixd.rctlocale.RCTLocalePackage;
 ...
-protected List<ReactPackage> getPackages() {
-	return Arrays.<ReactPackage>asList(
-			new MainReactPackage(),
-			...
-			new RCTLocalePackage()  // <- Add this
-	);
-}
+public class MainApplication extends Application implements ReactApplication {
+    // ...
+    @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+          new RCTLocalePackage() // add package
+      );
+    }
 ...
 ```
 

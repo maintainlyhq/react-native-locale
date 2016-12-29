@@ -76,20 +76,19 @@ For locale information:
 	"decimalSeparator":",",
 	"quotationBeginDelimiterKey":"“",
 	"quotationEndDelimiterKey":"”",
-
+  "currencySymbol":"DKK",
+  "currencyCode":"DKK",
+  "groupingSeparator":".",
 	// ios only:
 	"usesMetricSystem":true,
 	"localeLanguageCode":"en",
 	"countryCode":"DK",
 	"calendar":"gregorian",
-	"groupingSeparator":".",
-	"currencySymbol":"DKK",
 	"collatorIdentifier":"en-DK",
 	"alternateQuotationBeginDelimiterKey":"‘",
 	"alternateQuotationEndDelimiterKey":"’",
 	"measurementSystem":"Metric",
-	"preferredLanguages":["en-DK"],
-	"currencyCode":"DKK"
+	"preferredLanguages":["en-DK"]
 }
 ```
 
@@ -101,19 +100,20 @@ USA Locale:
 	"decimalSeparator":".",
 	"quotationBeginDelimiterKey":"“",
 	"quotationEndDelimiterKey":"”",
+  "currencySymbol":"$",
+  "currencyCode":"USD",
 
 	"usesMetricSystem":false,
 	"localeLanguageCode":"en",
 	"countryCode":"US",
 	"calendar":"gregorian",
 	"groupingSeparator":",",
-	"currencySymbol":"$",
 	"collatorIdentifier":"en-US",
 	"alternateQuotationBeginDelimiterKey":"‘",
 	"alternateQuotationEndDelimiterKey":"’",
 	"measurementSystem":"U.S.",
-	"preferredLanguages":["en-US"],
-	"currencyCode":"USD"
+	"preferredLanguages":["en-US"]
+	
 ```
 
 ### Numerical formatting

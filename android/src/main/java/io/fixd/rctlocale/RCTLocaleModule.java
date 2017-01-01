@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Date;
+import java.util.Currency;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.DecimalFormat;
@@ -38,11 +39,14 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
 
         Locale current = getLocale();
         DecimalFormatSymbols formatterSymbols = getDecimalFormat().getDecimalFormatSymbols();
+        Currency currency = Currency.getInstance(current);
 
         final Map<String, Object> constants = new HashMap<>();
         constants.put("localeIdentifier", current.toString());
         constants.put("decimalSeparator", String.valueOf(formatterSymbols.getDecimalSeparator()));
         constants.put("groupingSeparator", String.valueOf(formatterSymbols.getGroupingSeparator()));
+        constants.put("currencySymbol", currency.getSymbol());
+        constants.put("currencyCode", currency.getCurrencyCode());
 
         final Map<String, String> formats = new HashMap<>();
         DateFormat dateFormatter;

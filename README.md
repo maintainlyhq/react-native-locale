@@ -7,7 +7,7 @@ https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPIntern
 ## Installation
 
 - `npm install react-native-locale --save`
-- `rnpm link` [rnpm](https://github.com/rnpm/rnpm)
+- `react-native link react-native-locale`
 
 ### Add libraries manually
 
@@ -102,7 +102,7 @@ USA Locale:
 	"quotationEndDelimiterKey":"”",
   "currencySymbol":"$",
   "currencyCode":"USD",
-
+	// ios only:
 	"usesMetricSystem":false,
 	"localeLanguageCode":"en",
 	"countryCode":"US",

@@ -4,7 +4,7 @@
 //
 
 #import "RCTLocale.h"
-#import "RCTUtils.h"
+#import "React/RCTUtils.h"
 
 @implementation RCTConvert (NSDateFormatterStyle)
 RCT_ENUM_CONVERTER(NSDateFormatterStyle, (@{

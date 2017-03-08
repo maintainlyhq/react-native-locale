@@ -43,6 +43,7 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
 
         final Map<String, Object> constants = new HashMap<>();
         constants.put("localeIdentifier", current.toString());
+        constants.put("countryCode", current.getCountry());
         constants.put("decimalSeparator", String.valueOf(formatterSymbols.getDecimalSeparator()));
         constants.put("groupingSeparator", String.valueOf(formatterSymbols.getGroupingSeparator()));
         constants.put("currencySymbol", currency.getSymbol());

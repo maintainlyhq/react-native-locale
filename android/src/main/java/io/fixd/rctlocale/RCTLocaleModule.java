@@ -8,6 +8,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
 
 import java.lang.String;
+import java.lang.IllegalArgumentException;
 import java.text.DateFormat;
 import java.util.Map;
 import java.util.HashMap;
@@ -39,15 +40,21 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
 
         Locale current = getLocale();
         DecimalFormatSymbols formatterSymbols = getDecimalFormat().getDecimalFormatSymbols();
-        Currency currency = Currency.getInstance(current);
+        Currency currency = null;
+        try {
+            currency = Currency.getInstance(current);
+        } catch (IllegalArgumentException e) {
+            // Exception is ignorable because it means the locale doesn't have a currency
+            // associated with it.
+        }
 
         final Map<String, Object> constants = new HashMap<>();
         constants.put("localeIdentifier", current.toString());
         constants.put("countryCode", current.getCountry());
         constants.put("decimalSeparator", String.valueOf(formatterSymbols.getDecimalSeparator()));
         constants.put("groupingSeparator", String.valueOf(formatterSymbols.getGroupingSeparator()));
-        constants.put("currencySymbol", currency.getSymbol());
-        constants.put("currencyCode", currency.getCurrencyCode());
+        constants.put("currencySymbol", currency != null ? currency.getSymbol() : null);
+        constants.put("currencyCode", currency!= null ?  currency.getCurrencyCode() : null);
 
         final Map<String, String> formats = new HashMap<>();
         DateFormat dateFormatter;

@@ -82,9 +82,9 @@ For locale information:
 	"decimalSeparator":",",
 	"quotationBeginDelimiterKey":"“",
 	"quotationEndDelimiterKey":"”",
-  "currencySymbol":"DKK",
-  "currencyCode":"DKK",
-  "groupingSeparator":".",
+	"currencySymbol":"DKK",
+	"currencyCode":"DKK",
+	"groupingSeparator":".",
 	// ios only:
 	"usesMetricSystem":true,
 	"localeLanguageCode":"en",
@@ -106,8 +106,8 @@ USA Locale:
 	"decimalSeparator":".",
 	"quotationBeginDelimiterKey":"“",
 	"quotationEndDelimiterKey":"”",
-  "currencySymbol":"$",
-  "currencyCode":"USD",
+    "currencySymbol":"$",
+	"currencyCode":"USD",
 	// ios only:
 	"usesMetricSystem":false,
 	"localeLanguageCode":"en",

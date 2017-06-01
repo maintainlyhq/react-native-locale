@@ -4,23 +4,39 @@ Formats data based on locale settings.
 
 https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPInternational/InternationalizingLocaleData/InternationalizingLocaleData.html
 
+### RN < 0.40.0
+
+Please use `0.0.13` for any version of RN before `0.40.0` 
+
+`npm install react-native-locale@0.0.13 --save` 
+
 ## Installation
 
 - `npm install react-native-locale --save`
-- `rnpm link` [rnpm](https://github.com/rnpm/rnpm)
+- `react-native link react-native-locale`
 
 ### Add libraries manually
 
-For iOS: Add RCTLocale.xcodeproj to Libraries and add libRCTLocale.a to Link Binary With Libraries under Build Phases.
+#### iOS
 
-For Android:
+- Link manually
+  - Add RCTLocale.xcodeproj to Libraries and add libRCTLocale.a to Link Binary With Libraries under Build Phases.
+- Cocoapods
+  - Add following to your `Podfile`
+
+```ruby
+# Podfile
+pod 'react-native-locale', :path => './node_modules/react-native-locale'
+```
+
+#### Android
 
 ```
 // file: android/settings.gradle
 ...
 
-include ':RCTLocale', ':app'
-project(':RCTLocale').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-locale/android')
+include ':react-native-locale'
+project(':react-native-locale').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-locale/android')
 ```
 
 ```
@@ -29,16 +45,24 @@ project(':RCTLocale').projectDir = new File(rootProject.projectDir, '../node_mod
 
 dependencies {
     ...
-    compile project(':RCTLocale')
+    compile project(':react-native-locale')  // <- Add this
 }
 ```
 
 ```
-// file: android/app/source/main/java/com/{projectName}.MainActivity.java
+// file: android/app/source/main/java/com/{projectName}.MainApplication.java
 ...
-import fixd.io.rctlocale.RCTLocalePackage;
+import io.fixd.rctlocale.RCTLocalePackage;
 ...
-.addPackage(new RNSimpleAlertDialogPackage(this))
+public class MainApplication extends Application implements ReactApplication {
+    // ...
+    @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+          new RCTLocalePackage() // add package
+      );
+    }
 ...
 ```
 
@@ -58,20 +82,19 @@ For locale information:
 	"decimalSeparator":",",
 	"quotationBeginDelimiterKey":"“",
 	"quotationEndDelimiterKey":"”",
-
+	"currencySymbol":"DKK",
+	"currencyCode":"DKK",
+	"groupingSeparator":".",
 	// ios only:
 	"usesMetricSystem":true,
 	"localeLanguageCode":"en",
 	"countryCode":"DK",
 	"calendar":"gregorian",
-	"groupingSeparator":".",
-	"currencySymbol":"DKK",
 	"collatorIdentifier":"en-DK",
 	"alternateQuotationBeginDelimiterKey":"‘",
 	"alternateQuotationEndDelimiterKey":"’",
 	"measurementSystem":"Metric",
-	"preferredLanguages":["en-DK"],
-	"currencyCode":"DKK"
+	"preferredLanguages":["en-DK"]
 }
 ```
 
@@ -83,19 +106,20 @@ USA Locale:
 	"decimalSeparator":".",
 	"quotationBeginDelimiterKey":"“",
 	"quotationEndDelimiterKey":"”",
-
+    "currencySymbol":"$",
+	"currencyCode":"USD",
+	// ios only:
 	"usesMetricSystem":false,
 	"localeLanguageCode":"en",
 	"countryCode":"US",
 	"calendar":"gregorian",
 	"groupingSeparator":",",
-	"currencySymbol":"$",
 	"collatorIdentifier":"en-US",
 	"alternateQuotationBeginDelimiterKey":"‘",
 	"alternateQuotationEndDelimiterKey":"’",
 	"measurementSystem":"U.S.",
-	"preferredLanguages":["en-US"],
-	"currencyCode":"USD"
+	"preferredLanguages":["en-US"]
+	
 ```
 
 ### Numerical formatting

@@ -53,6 +53,7 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
         constants.put("countryCode", current.getCountry());
         constants.put("decimalSeparator", String.valueOf(formatterSymbols.getDecimalSeparator()));
         constants.put("groupingSeparator", String.valueOf(formatterSymbols.getGroupingSeparator()));
+        constants.put("usesMetricSystem", !current.getISO3Country().equalsIgnoreCase("usa"));
         constants.put("currencySymbol", currency != null ? currency.getSymbol() : null);
         constants.put("currencyCode", currency!= null ?  currency.getCurrencyCode() : null);
 

@@ -4,6 +4,12 @@ Formats data based on locale settings.
 
 https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPInternational/InternationalizingLocaleData/InternationalizingLocaleData.html
 
+### RN < 0.47.0
+
+Please use `0.0.17` for any version of RN before `0.47.0` 
+
+`npm install react-native-locale@0.0.17 --save`
+ 
 ### RN < 0.40.0
 
 Please use `0.0.13` for any version of RN before `0.40.0` 

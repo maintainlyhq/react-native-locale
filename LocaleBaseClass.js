@@ -1,34 +1,32 @@
-import { Platform, NativeModules } from 'react-native';
-const NativeLocale = NativeModules.Locale;
+import { NativeEventEmitter, NativeModules } from 'react-native';
+const RCTLocale = NativeModules.Locale;
 const warning = require('fbjs/lib/warning');
 
-class LocaleBaseClass {
+export default class LocaleBaseClass {
 
 	static constants() {
-		return NativeLocale;
+		return RCTLocale;
 	}
 
-	static numberFromDecimalString(number : string) {
-		return NativeLocale.numberFromDecimalString(number);
+	static numberFromDecimalString(number) {
+		return RCTLocale.numberFromDecimalString(number);
 	}
 
-	static decimalStyle(number : number) {
-		return NativeLocale.decimalStyle(number);
+	static decimalStyle(number) {
+		return RCTLocale.decimalStyle(number);
 	}
 
-	static validateDateFormatStyle(style : string) {
+	static validateDateFormatStyle(style) {
 		let valid = ['full', 'long', 'medium', 'short', 'none'];
 		if(Platform.OS == 'ios')
 			valid.push('default');
 		return valid.indexOf(style) >= 0;
 	}
 
-	static dateFormat(date, dateStyle : string, timeStyle : string) {
+	static dateFormat(date, dateStyle, timeStyle) {
 		warning(LocaleBaseClass.validateDateFormatStyle(dateStyle), 'Locale: DateStyle must be one of [full/long/medium/short/none]');
 		warning(LocaleBaseClass.validateDateFormatStyle(timeStyle), 'Locale: TimeStyle must be one of [full/long/medium/short/none]');
-		return NativeLocale.dateFormat(date, dateStyle, timeStyle);
+		return RCTLocale.dateFormat(date, dateStyle, timeStyle);
 	}
 
 }
-
-module.exports = LocaleBaseClass;

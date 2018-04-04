@@ -29,6 +29,10 @@ class LocaleBaseClass {
 		return NativeLocale.dateFormat(date, dateStyle, timeStyle);
 	}
 
+  static getCustomLocale(countryCode : string) {
+    return NativeLocale.getCustomLocale(countryCode);
+  }
+
 }
 
 module.exports = LocaleBaseClass;

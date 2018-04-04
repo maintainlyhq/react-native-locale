@@ -1,11 +1,13 @@
 package io.fixd.rctlocale;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.WritableMap;
 
 import java.lang.String;
 import java.lang.IllegalArgumentException;
@@ -81,6 +83,50 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
         } catch (Exception e) {
             promise.reject(e.getMessage());
         }
+    }
+
+    @ReactMethod
+    public void getCustomLocale(String countryCode, Promise promise) {
+        Locale[] locales = Locale.getAvailableLocales();
+        Locale customLocale = null;
+
+        for (Locale eachLocale : locales) {
+            if (eachLocale.getCountry().equals(countryCode)) {
+                customLocale = eachLocale;
+                break;
+            }
+        }
+
+        DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(customLocale);
+        DecimalFormatSymbols formatterSymbols = formatter.getDecimalFormatSymbols();
+        Currency currency = null;
+        try {
+            currency = Currency.getInstance(customLocale);
+        } catch (IllegalArgumentException e) {
+        }
+
+        WritableMap map = Arguments.createMap();
+        map.putString("localeIdentifier", customLocale.toString());
+        map.putString("countryCode", customLocale.getCountry());
+        map.putString("decimalSeparator", String.valueOf(formatterSymbols.getDecimalSeparator()));
+        map.putString("groupingSeparator", String.valueOf(formatterSymbols.getGroupingSeparator()));
+        map.putBoolean("usesMetricSystem", !customLocale.getISO3Country().equalsIgnoreCase("usa"));
+        map.putString("currencySymbol", currency != null ? currency.getSymbol() : null);
+        map.putString("currencyCode", currency!= null ?  currency.getCurrencyCode() : null);
+
+        WritableMap formats = Arguments.createMap();
+        DateFormat dateFormatter;
+        dateFormatter = DateFormat.getDateInstance(DateFormat.FULL, getLocale());
+        formats.putString("full", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
+        dateFormatter = DateFormat.getDateInstance(DateFormat.LONG, getLocale());
+        formats.putString("long", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
+        dateFormatter = DateFormat.getDateInstance(DateFormat.MEDIUM, getLocale());
+        formats.putString("medium", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
+        dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, getLocale());
+        formats.putString("short", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
+        map.putMap("localeDateFormats", formats);
+
+        promise.resolve(map);
     }
 
     @ReactMethod

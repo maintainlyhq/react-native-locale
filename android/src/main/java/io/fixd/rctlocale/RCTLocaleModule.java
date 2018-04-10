@@ -88,7 +88,7 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getCustomLocale(String countryCode, Promise promise) {
         Locale[] locales = Locale.getAvailableLocales();
-        Locale customLocale = null;
+        Locale customLocale = getLocale();
 
         for (Locale eachLocale : locales) {
             if (eachLocale.getCountry().equals(countryCode)) {
@@ -116,13 +116,13 @@ public class RCTLocaleModule extends ReactContextBaseJavaModule {
 
         WritableMap formats = Arguments.createMap();
         DateFormat dateFormatter;
-        dateFormatter = DateFormat.getDateInstance(DateFormat.FULL, getLocale());
+        dateFormatter = DateFormat.getDateInstance(DateFormat.FULL, customLocale);
         formats.putString("full", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
-        dateFormatter = DateFormat.getDateInstance(DateFormat.LONG, getLocale());
+        dateFormatter = DateFormat.getDateInstance(DateFormat.LONG, customLocale);
         formats.putString("long", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
-        dateFormatter = DateFormat.getDateInstance(DateFormat.MEDIUM, getLocale());
+        dateFormatter = DateFormat.getDateInstance(DateFormat.MEDIUM, customLocale);
         formats.putString("medium", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
-        dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, getLocale());
+        dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, customLocale);
         formats.putString("short", ((SimpleDateFormat) dateFormatter).toLocalizedPattern());
         map.putMap("localeDateFormats", formats);
 

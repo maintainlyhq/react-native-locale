@@ -22,6 +22,10 @@ RCT_ENUM_CONVERTER(NSDateFormatterStyle, (@{
 @implementation RCTLocale
 RCT_EXPORT_MODULE();
 
++ (BOOL)requiresMainQueueSetup
+{
+    return YES;
+}
 
 RCT_EXPORT_METHOD(decimalStyle:(nonnull NSNumber *)myNumber
                   resolver:(RCTPromiseResolveBlock)resolve

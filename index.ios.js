@@ -1,20 +1,18 @@
-import {NativeModules} from 'react-native';
-const NativeLocale = NativeModules.Locale;
-const LocaleBaseClass = require('./LocaleBaseClass');
+import { NativeModules } from 'react-native';
+import LocaleBaseClass from './LocaleBaseClass';
+const RCTLocale = NativeModules.Locale;
 
-class Locale extends LocaleBaseClass {
-	static currencyStyle(number : number) {
-		return NativeLocale.currencyStyle(number);
+export default class Locale extends LocaleBaseClass {
+	static currencyStyle(number) {
+		return RCTLocale.currencyStyle(number);
 	}
-	static percentStyle(number : number) {
-		return NativeLocale.percentStyle(number);
+	static percentStyle(number) {
+		return RCTLocale.percentStyle(number);
 	}
-	static scientificStyle(number : number) {
-		return NativeLocale.scientificStyle(number);
+	static scientificStyle(number) {
+		return RCTLocale.scientificStyle(number);
 	}
-	static spelloutStyle(number : number) {
-		return NativeLocale.scientificStyle(number);
+	static spelloutStyle(number) {
+		return RCTLocale.scientificStyle(number);
 	}
 }
-
-module.exports = Locale;
